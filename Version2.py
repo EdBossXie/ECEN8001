@@ -6,12 +6,57 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
+def imshow(img):
+    npimg = img.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
+    plt.show()
+
+def get_same_index(target, label):
+	label_indices = []
+	for i in range(len(target)):
+		if target[i][1] == label:
+			label_indices.append(target[i])
+	return label_indices
+
+classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
 train = datasets.CIFAR10(root = './data', train = True, download = True, transform = transforms.Compose([transforms.ToTensor()]))
 
 test = datasets.CIFAR10(root = './data', train = False, download = True, transform = transforms.Compose([transforms.ToTensor()]))
 
 trainset = torch.utils.data.DataLoader(train, batch_size = 10, shuffle = True)
+
 testset = torch.utils.data.DataLoader(test, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 0)
+testplane = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 1)
+testcar = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 2)
+testbird= torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 3)
+testcat = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 4)
+testdeer = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 5)
+testdog = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 6)
+testfrog = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 7)
+testhorse = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 8)
+testship = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
+
+test_indices = get_same_index(test, 9)
+testtruck = torch.utils.data.DataLoader(test_indices, batch_size = 10, shuffle = False)
 
 class Net(nn.Module):
 	def __init__(self):
@@ -76,4 +121,154 @@ with torch.no_grad():
 				correct += 1
 			total += 1
 
-print("Test accuracy: ", round(correct/total, 3))
+print("Total test accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testplane:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Plane accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testcar:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Car accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testbird:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Bird accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testcat:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Cat accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testdeer:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Deer accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testdog:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Dog accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testfrog:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Frog accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testhorse:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Horse accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testship:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Ship accuracy: ", round(correct/total, 3))
+
+correct = 0
+total = 0
+
+with torch.no_grad():
+	for data in testtruck:
+		X, y = data
+		output = net(X)
+		#print(output)
+		for idx, i in enumerate(output):
+			if torch.argmax(i) == y[idx]:
+				correct += 1
+			total += 1
+
+print("Truck accuracy: ", round(correct/total, 3))
